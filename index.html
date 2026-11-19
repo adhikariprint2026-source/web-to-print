@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adhikari Print - Web To Print</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#f6f7fb;color:#111}
+header{background:#111;color:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0}
+header b{font-size:20px} header b span{color:#ffcc00}
+header a{background:#ffcc00;color:#000;padding:8px 14px;border-radius:20px;text-decoration:none;font-weight:bold}
+.hero{background:#fff;padding:36px 20px;text-align:center}
+.hero h1{font-size:32px;line-height:1.2}
+.hero h1 span{color:#e11d48}
+.hero p{color:#666;margin:12px 0 18px}
+.hero a{display:inline-block;background:#111;color:#fff;padding:12px 22px;border-radius:30px;text-decoration:none;font-weight:bold}
+.grid{max-width:1000px;margin:20px auto;padding:0 14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+.card img{width:100%;height:180px;object-fit:cover}
+.card .pad{padding:16px}
+.card h3{font-size:18px}.card p{color:#666;font-size:14px;margin:6px 0}
+.price{font-size:20px;font-weight:bold;color:#e11d48}
+.btn{display:block;text-align:center;background:#ffcc00;padding:11px;border-radius:10px;text-decoration:none;color:#000;font-weight:bold;margin-top:10px}
+.order{max-width:600px;margin:20px auto;background:#fff;padding:20px;border-radius:16px}
+.order h2{margin-bottom:12px}
+input,select,textarea{width:100%;padding:12px;margin:7px 0;border:1px solid #ddd;border-radius:10px}
+.order button{width:100%;padding:13px;background:#111;color:#fff;border:0;border-radius:10px;font-weight:bold;font-size:16px}
+footer{text-align:center;padding:20px;color:#888}
+</style>
+</head>
+<body>
+<header><b>Adhikari <span>Print</span></b><a href="#order">Order Now</a></header>
+<div class="hero">
+<h1>Print Anything.<br><span>Delivered To You.</span></h1>
+<p>Business Cards • Flyers • Posters • Banners • T-Shirts • Mugs<br>Upload design, select qty, pay online.</p>
+<a href="#products">Browse Products ↓</a>
+</div>
+
+<div class="grid" id="products">
+<div class="card"><img src="https://images.unsplash.com/photo-1589041127168-9b1915731dc3?w=800"><div class="pad"><h3>Business Cards - Premium</h3><p>350 GSM Matte • 100 pcs • 2 Days</p><div class="price">₹499</div><a class="btn" href="#order">Order Now</a></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800"><div class="pad"><h3>Flyers / Pamphlets</h3><p>A5 Glossy • 500 pcs • Best for Promotion</p><div class="price">₹999</div><a class="btn" href="#order">Order Now</a></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1562564055-71e051d33c19?w=800"><div class="pad"><h3>Poster - A3 Size</h3><p>High Quality Print • Single Piece</p><div class="price">₹149</div><a class="btn" href="#order">Order Now</a></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800"><div class="pad"><h3>Custom T-Shirt</h3><p>Cotton • Full Colour Print • All Sizes</p><div class="price">₹399</div><a class="btn" href="#order">Order Now</a></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=800"><div class="pad"><h3>Custom Mug</h3><p>Ceramic • Photo Print • Gift Ready</p><div class="price">₹249</div><a class="btn" href="#order">Order Now</a></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1586717799252-bd134ad00e26?w=800"><div class="pad"><h3>Flex Banner</h3><p>3x5 Feet • Waterproof • With Eyelets</p><div class="price">₹599</div><a class="btn" href="#order">Order Now</a></div></div>
+</div>
+
+<div class="order" id="order">
+<h2>Place Your Order</h2>
+<input id="name" placeholder="Your Full Name">
+<input id="phone" placeholder="Phone / WhatsApp Number">
+<select id="product">
+<option>Business Cards - ₹499</option><option>Flyers - ₹999</option><option>Poster - ₹149</option><option>Custom T-Shirt - ₹399</option><option>Custom Mug - ₹249</option><option>Flex Banner - ₹599</option>
+</select>
+<input type="number" id="qty" value="1" min="1" placeholder="Quantity">
+<textarea placeholder="Address / Notes"></textarea>
+<input type="file">
+<button onclick="placeOrder()">Place Order on WhatsApp</button>
+<p id="msg" style="text-align:center;margin-top:10px;color:green"></p>
+</div>
+<footer>© 2026 Adhikari Print • Bengaluru, India • adhikari.print2026@gmail.com</footer>
+<script>
+function placeOrder(){
+let n=document.getElementById('name').value;
+let p=document.getElementById('product').value;
+let q=document.getElementById('qty').value;
+if(!n){alert('Please enter your name');return;}
+let text="Hello Adhikari Print! I want to order: "+p+" | Qty: "+q+" | Name: "+n;
+window.open("https://wa.me/919999999999?text="+encodeURIComponent(text),"_blank");
+document.getElementById('msg').innerText="Opening WhatsApp...";
+}
+</script>
+</body>
+</html>
