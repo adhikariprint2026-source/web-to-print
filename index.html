@@ -257,6 +257,8 @@ function showProofs(){
 } function approve(){
   let box = document.getElementById("proofsBox");
   box.innerHTML = "<b>✅ Proof Approved!</b><br>TEAM 101 • DIGITAL HEROES - Approved - Ready for Production<br><br><button onclick=\"document.getElementById('proofsBox').style.display='none'\">Close</button>";
+  document.getElementById("proofStatus").innerText = "✅ Approved";
+  document.getElementById("approvalLog").innerText = "✅ Approved by Customer (customer@demo.com)";
   alert("✅ Proof Approved! Ready for Production.");
 }  
 function reorder(){ selectProduct('Race Numbers',42); document.getElementById('qty').value=50; calc(); window.scrollTo({top:0,behavior:'smooth'}); alert("1-Click Reorder Done! Race Numbers x 50 added again - Same design, no redesign needed."); }
