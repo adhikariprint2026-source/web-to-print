@@ -172,7 +172,7 @@ function payCard(){document.getElementById('payStatus').innerText='Payment Succe
 </div>
 </section>
 <button onclick="localStorage.setItem('dh1042','PRODUCTION');document.body.innerHTML=document.body.innerHTML.replace('PROOF • 🔴 Not Ready','PRODUCTION • 🟢 Ready').replace('PROOF • 🔴','PRODUCTION • 🟢').replace('Not Ready','Ready');alert(' DH-1042 moved to PRODUCTION! Saved permanently')">Move to Production</button>
-<script>window.addEventListener('load',function(){if(localStorage.getItem('dh1042')=='PRODUCTION'){document.body.innerHTML=document.body.innerHTML.replace('PROOF • 🔴','PRODUCTION • 🟢');}});</script>  
+<script>window.addEventListener('load',function(){if(localStorage.getItem('dh1042')=='PRODUCTION'){document.body.innerHTML=document.body.innerHTML.replace('PROOF • 🔴 Not Ready','PRODUCTION • 🟢 Ready').replace('PROOF • 🔴','PRODUCTION • 🟢').replace('PROOF','PRODUCTION');}});</script>
 <section id="gallery" class="max-w-7xl mx-auto px-4 mt-6">
 <h2 class="geo text-2xl font-black">LIVE WORK GALLERY — BY PRODUCT FAMILY</h2>
 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
