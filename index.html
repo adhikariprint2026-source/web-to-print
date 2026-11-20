@@ -190,7 +190,21 @@ function payCard(){document.getElementById('payStatus').innerText='Payment Succe
 <script>
 let stageIdx=2; const stages=["QUOTE","ORDER","ARTWORK","PROOF","PRODUCTION","COMPLETED"];
 let prices={ "Race Numbers":42, "Labels":12, "MTB Boards":299, "Stamps":249, "Trophies":499, "Laser-Cut":199 };
-function selectProduct(n,p){ document.getElementById('selProd').innerText=n+" — "+p; document.getElementById('prod').value=n; document.getElementById('orderProd').innerText=n; calc(); document.getElementById('calculator').scrollIntoView({behavior:'smooth'}); }
+function selectProduct(name, price){
+  document.getElementById("selProd").innerHTML = name + " - " + price;
+  // Save base price for calculator
+  window.selectedBase = parseInt(price.replace(/[^0-9]/g,"")) || 0;
+  window.selectedProduct = name;
+  // Also update calculator product field if it exists
+  let prodField = document.getElementById("calcProduct") || document.getElementById("product");
+  if(prodField) prodField.value = name;
+  // Recalculate total with new base price
+  if(typeof updatePrice === "function") updatePrice();
+  if(typeof calcPrice === "function") calcPrice();
+  if(typeof calculate === "function") calculate();
+  // Scroll to calculator
+  document.getElementById("calculator").scrollIntoView({behavior:"smooth"});
+}
 function calc(){ let prod=document.getElementById('prod').value; let q=parseInt(document.getElementById('qty').value)||0; let unit=prices[prod]||42; let base=q*unit; let discRate=q>=500?0.15:q>=250?0.10:q>=100?0.05:0; let disc=base*discRate; let mat=parseInt(document.getElementById('mat').value)||0; let vat=(base-disc+mat)*0.18; let total=base-disc+mat+vat;
 document.getElementById('base').innerText="₹ "+base.toLocaleString('en-IN'); document.getElementById('disc').innerText="- ₹ "+Math.round(disc).toLocaleString('en-IN'); document.getElementById('matP').innerText="₹ "+mat; document.getElementById('vat').innerText="₹ "+Math.round(vat).toLocaleString('en-IN'); document.getElementById('total').innerText="₹ "+Math.round(total).toLocaleString('en-IN'); }
 function draw(){ let c=document.getElementById('cv'); let ctx=c.getContext('2d'); ctx.clearRect(0,0,520,280); ctx.fillStyle="#F7F5F0"; ctx.fillRect(0,0,520,280); ctx.strokeStyle="#FF5A1F"; ctx.setLineDash([6,6]); ctx.strokeRect(20,20,480,240); ctx.setLineDash([]); ctx.fillStyle=document.getElementById('fontColor').value||"black"; ctx.font="900 "+document.getElementById('fontSize').value+"px Archivo"; ctx.textAlign="center"; let t=document.getElementById('designText').value||""; ctx.fillText(t.substring(0,28),260,140); ctx.font="12px Inter"; ctx.fillStyle="#888"; ctx.fillText("PRINT AREA • 480 x 240 • Bleed 3mm • 300 DPI",260,260); }
