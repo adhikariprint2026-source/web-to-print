@@ -204,7 +204,23 @@ calc();
 }
 function calc(){ let prod=document.getElementById('prod').value; let q=parseInt(document.getElementById('qty').value)||0; let unit=prices[prod]||42; let base=q*unit; let discRate=q>=500?0.15:q>=250?0.10:q>=100?0.05:0; let disc=base*discRate; let mat=parseInt(document.getElementById('mat').value)||0; let vat=(base-disc+mat)*0.18; let total=base-disc+mat+vat;
 document.getElementById('base').innerText="₹ "+base.toLocaleString('en-IN'); document.getElementById('disc').innerText="- ₹ "+Math.round(disc).toLocaleString('en-IN'); document.getElementById('matP').innerText="₹ "+mat; document.getElementById('vat').innerText="₹ "+Math.round(vat).toLocaleString('en-IN'); document.getElementById('total').innerText="₹ "+Math.round(total).toLocaleString('en-IN'); }
-function draw(){ let c=document.getElementById('cv'); let ctx=c.getContext('2d'); ctx.clearRect(0,0,520,280); ctx.fillStyle="#F7F5F0"; ctx.fillRect(0,0,520,280); ctx.strokeStyle="#FF5A1F"; ctx.setLineDash([6,6]); ctx.strokeRect(20,20,480,240); ctx.setLineDash([]); ctx.fillStyle=document.getElementById('fontColor').value||"black"; ctx.font="900 "+document.getElementById('fontSize').value+"px Archivo"; ctx.textAlign="center"; let t=document.getElementById('designText').value||""; ctx.fillText(t.substring(0,28),260,140); ctx.font="12px Inter"; ctx.fillStyle="#888"; ctx.fillText("PRINT AREA • 480 x 240 • Bleed 3mm • 300 DPI",260,260); }
+function draw(){
+  let c=document.getElementById('cv'); let ctx=c.getContext('2d');
+  ctx.clearRect(0,0,520,280);
+  // 1. Background + Border FIRST - no clip
+  ctx.fillStyle="#F7F5F0"; ctx.fillRect(0,0,520,280);
+  ctx.strokeStyle="#FF5A1F"; ctx.setLineDash([6,6]); ctx.strokeRect(20,20,480,240);
+  ctx.setLineDash([]);
+  // 2. Now CLIP only for the design text / image
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(20,20,480,240);
+  ctx.clip();
+  // 3. YOUR TEXT DRAWING GOES HERE - e.g. ctx.fillText(...)
+  // ... keep your existing text lines here ...
+  // 4. Release clip
+  ctx.restore();
+}
 function saveDesign(){ document.getElementById('designMsg').innerText="✅ Design Saved! It appears in Customer Dashboard → Saved Designs."; document.getElementById('savedCount').innerText="2 Saved"; }
 function requestProof(){ alert("Proof v1 created and sent to customer. Customer can Approve or Request Change."); }
 function approve(){ document.getElementById('approvalLog').innerText="✅ Approved by Customer (customer@demo.com) on 20 Nov 2026, 2:15 PM — v1 Approved"; document.getElementById('pdfArea').classList.remove('locked'); document.getElementById('pdfArea').innerHTML='<p class="font-bold text-green-600">✅ PDF UNLOCKED — READY FOR PRODUCTION</p><p class="text-xs">DH-2026-1042_RaceNumbers_2026-11-20_Output.pdf</p><button class="btn mt-2" onclick="alert(\'Downloading DH-2026-1042_RaceNumbers_2026-11-20_Output.pdf — High-Res 300 DPI\')">Download PDF ↓</button>'; document.getElementById('readyInd').innerText="🟢 READY — Proof Approved"; document.getElementById('readyInd').className="text-green-600"; }
