@@ -219,10 +219,13 @@ function draw(){
    let txt = (document.getElementById("designText")?.value || document.getElementById("textInput")?.value || "YOUR TEXT");
   let fs = parseInt(document.getElementById("fontSize")?.value || 32);
   let col = document.getElementById("textColor")?.value || document.getElementById("fontColor")?.value || "#000";
-  ctx.font = "bold " + fs + "px Arial";
+    ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  while(fs > 10){
+    ctx.font = "bold " + fs + "px Arial";
+    if(ctx.measureText(txt).width <= 440) break;
+    fs -= 2;
+  }
   ctx.fillStyle = col;
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
   ctx.fillText(txt, 260, 140);
   // 4. Release clip
   ctx.restore();
