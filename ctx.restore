@@ -216,8 +216,14 @@ function draw(){
   ctx.beginPath();
   ctx.rect(20,20,480,240);
   ctx.clip();
-  // 3. YOUR TEXT DRAWING GOES HERE - e.g. ctx.fillText(...)
-  // ... keep your existing text lines here ...
+   let txt = (document.getElementById("designText")?.value || document.getElementById("textInput")?.value || "YOUR TEXT");
+  let fs = parseInt(document.getElementById("fontSize")?.value || 32);
+  let col = document.getElementById("textColor")?.value || document.getElementById("fontColor")?.value || "#000";
+  ctx.font = "bold " + fs + "px Arial";
+  ctx.fillStyle = col;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(txt, 260, 140);
   // 4. Release clip
   ctx.restore();
 }
