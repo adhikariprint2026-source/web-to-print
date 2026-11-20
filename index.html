@@ -159,7 +159,7 @@ function payCard(){document.getElementById('payStatus').innerText='Payment Succe
 </script>  
 <p class="text-[11px] text-gray-500 mt-2">Customer never sees production files of others. Role-separated (PRD §10).</p>
 </div>
-<div class="card">
+<div class="card" id="prodDashboard">
 <h3 class="geo text-xl font-black">ADMIN / PRODUCTION DASHBOARD</h3>
 <input placeholder="🔍 Search by customer / order / product..." oninput="filterAdmin(this.value)" class="mt-2">
 <div class="flex gap-2 mt-2"><select onchange="filterAdmin(this.value)"><option>All Status</option><option>PROOF</option><option>PRODUCTION</option><option>COMPLETED</option></select><button class="bg-black text-white px-3 py-2 rounded-lg text-sm" onclick="exportXero()">Export Xero CSV ↓</button></div>
@@ -206,7 +206,7 @@ function reorder(){ selectProduct('Race Numbers',42); document.getElementById('q
 function downloadInvoice(){ alert("Downloading Invoice INV-1042.pdf — ₹5,015 • VAT Invoice • Xero-Ready"); }
 function exportXero(){ alert("Exported Xero CSV: OrderID, Customer, Product, Total, VAT — Ready for Accounting"); }
 function filterAdmin(v){ /* demo filter */ }
-function show(which){ if(which=="customer"){ let e=prompt("Customer Login - Email:","customer@demo.com"); if(!e) return; let p=prompt("Password:","123456"); if(e=="customer@demo.com" && p=="123456"){ document.getElementById("dashboard").style.display="grid"; document.getElementById("adminDashboard").style.display="none"; alert("Welcome Customer!"); } else { alert("Wrong Email or Password."); } } else { let e=prompt("Admin Login - Email:","admin@demo.com"); if(!e) return; let p=prompt("Password:","admin123"); if(e=="admin@demo.com" && p=="admin123"){ document.getElementById("dashboard").style.display="none"; document.getElementById("adminDashboard").style.display="block"; document.getElementById("adminEmail").innerText=e; alert("Welcome Admin!"); } else { alert("Wrong Admin Email or Password."); } } }
+function show(which){ if(which=="customer"){ let e=prompt("Customer Login - Email:","customer@demo.com"); if(!e) return; let p=prompt("Password:","123456"); if(p!=="123456"){alert("Wrong password");return;} document.getElementById("dashboard").style.display="grid"; document.getElementById("adminDashboard").style.display="none"; if(document.getElementById("prodDashboard")) document.getElementById("prodDashboard").style.display="none"; } else { let e=prompt("Admin Login - Email:","admin@demo.com"); if(!e) return; let p=prompt("Password:","admin123"); if(p!=="admin123"){alert("Wrong password");return;} document.getElementById("dashboard").style.display="none"; document.getElementById("adminDashboard").style.display="block"; if(document.getElementById("prodDashboard")) document.getElementById("prodDashboard").style.display="block"; } }
 function adminLogout(){ document.getElementById("adminDashboard").style.display="none"; document.getElementById("dashboard").style.display="grid"; alert("Admin Logged Out"); }
 function markPaid(){ document.getElementById("adminOrderStatus").innerText="Paid"; document.getElementById("adminMsg").innerText="Order DH-1042 updated to Paid"; }
 function markUnpaid(){ document.getElementById("adminOrderStatus").innerText="Unpaid"; document.getElementById("adminMsg").innerText="Order DH-1042 updated to Unpaid"; }
