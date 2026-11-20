@@ -196,7 +196,7 @@ function reorder(){ selectProduct('Race Numbers',42); document.getElementById('q
 function downloadInvoice(){ alert("Downloading Invoice INV-1042.pdf — ₹5,015 • VAT Invoice • Xero-Ready"); }
 function exportXero(){ alert("Exported Xero CSV: OrderID, Customer, Product, Total, VAT — Ready for Accounting"); }
 function filterAdmin(v){ /* demo filter */ }
-function show(which){ alert(which=="customer"?"Customer Dashboard — Login: customer@demo.com / 123456 — Scroll to Customer Dashboard section below.":"Admin Dashboard — Login: admin@demo.com / 123456 — Scroll to Admin Dashboard section below."); document.getElementById('dashboard').scrollIntoView({behavior:'smooth'}); }
+function show(which){ if(which=="customer"){ let e=prompt("Customer Login - Email:","customer@demo.com"); if(!e) return; let p=prompt("Password:","123456"); if(e=="customer@demo.com" && p=="123456"){ alert("Welcome Customer! Login Successful."); document.getElementById('dash').scrollIntoView({behavior:'smooth'}); } else { alert("Wrong Email or Password. Try customer@demo.com / 123456"); } } else { alert("Admin Dashboard - Demo Only"); } }
 calc(); draw();
 </script>
 </body>
