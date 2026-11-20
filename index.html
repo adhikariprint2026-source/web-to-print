@@ -130,6 +130,23 @@ Rohan,103</textarea>
 <div class="bg-[#F7F5F0] p-3 rounded-xl"><b>🔁 Reorder</b><br><button class="text-[#FF5A1F] font-bold" onclick="reorder()">1-Click Reorder →</button></div>
 <div class="bg-[#F7F5F0] p-3 rounded-xl"><b>🧾 Invoices</b><br><button class="font-bold" onclick="downloadInvoice()">Download Invoice ↓</button></div>
 </div>
+<!-- PAY NOW FIX -->
+<button onclick="openPay()" style="background:#16a34a;color:#fff;padding:12px 18px;border:0;border-radius:10px;font-weight:800;cursor:pointer;width:100%;margin-top:10px;">Pay Now • ₹5,015</button>
+<div id="payModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;">
+<div style="background:#fff;max-width:380px;margin:80px auto;padding:20px;border-radius:14px;">
+<h3>Pay for DH-1042</h3>
+<p>Race Numbers • ₹5,015</p>
+<button onclick="payUPI()" style="width:100%;padding:12px;margin:6px 0;background:#000;color:#fff;border:0;border-radius:8px;">Pay via UPI</button>
+<button onclick="payCard()" style="width:100%;padding:12px;margin:6px 0;background:#fff;border:2px solid #000;border-radius:8px;">Pay via Card</button>
+<button onclick="closePay()" style="width:100%;padding:10px;margin-top:6px;border:0;background:#eee;border-radius:8px;">Cancel</button>
+<p id="payStatus" style="font-weight:700;color:green;"></p>
+</div></div>
+<script>
+function openPay(){document.getElementById('payModal').style.display='block';}
+function closePay(){document.getElementById('payModal').style.display='none';}
+function payUPI(){document.getElementById('payStatus').innerText='Payment Successful via UPI - Order PAID'; setTimeout(()=>{closePay(); alert('Payment Successful! Order DH-1042 is now PAID');},800);}
+function payCard(){document.getElementById('payStatus').innerText='Payment Successful via Card - Order PAID'; setTimeout(()=>{closePay(); alert('Payment Successful! Order DH-1042 is now PAID');},800);}
+</script>  
 <p class="text-[11px] text-gray-500 mt-2">Customer never sees production files of others. Role-separated (PRD §10).</p>
 </div>
 <div class="card">
