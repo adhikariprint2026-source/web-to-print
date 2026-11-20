@@ -249,6 +249,12 @@ function showSavedDesigns(){
     box.innerHTML = "<b>Your Saved Designs:</b><br>" + saved.map((d,i)=> (i+1)+". "+ (d.text||d.name||JSON.stringify(d))).join("<br>") + "<br><button onclick=\"document.getElementById('savedDesignsBox').style.display='none'\">Close</button>";
   }
 }
+function showProofs(){
+  let box = document.getElementById("proofsBox");
+  if(box.style.display === "block"){ box.style.display = "none"; return; }
+  box.style.display = "block";
+  box.innerHTML = "<b>Active Proof - v1:</b><br>TEAM 101 • DIGITAL HEROES - Awaiting Approval<br><br><button onclick=\"approve()\">✅ Approve</button> <button onclick=\"requestChange()\">🔁 Request Change</button> <button onclick=\"document.getElementById('proofsBox').style.display='none'\">Close</button>";
+}  
 function reorder(){ selectProduct('Race Numbers',42); document.getElementById('qty').value=50; calc(); window.scrollTo({top:0,behavior:'smooth'}); alert("1-Click Reorder Done! Race Numbers x 50 added again - Same design, no redesign needed."); }
 function downloadInvoice(){ alert("Downloading Invoice INV-1042.pdf — ₹5,015 • VAT Invoice • Xero-Ready"); }
 function exportXero(){ alert("Exported Xero CSV: OrderID, Customer, Product, Total, VAT — Ready for Accounting"); }
