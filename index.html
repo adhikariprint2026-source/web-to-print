@@ -196,12 +196,9 @@ function selectProduct(name, price){
   window.selectedBase = parseInt(price.replace(/[^0-9]/g,"")) || 0;
   window.selectedProduct = name;
   // Also update calculator product field if it exists
-  let prodField = document.getElementById("calcProduct") || document.getElementById("product");
-  if(prodField) prodField.value = name;
-  // Recalculate total with new base price
-  if(typeof updatePrice === "function") updatePrice();
-  if(typeof calcPrice === "function") calcPrice();
-  if(typeof calculate === "function") calculate();
+  let prodField = document.getElementById("prod");
+if(prodField) prodField.value = name;
+calc();
   // Scroll to calculator
   document.getElementById("calculator").scrollIntoView({behavior:"smooth"});
 }
