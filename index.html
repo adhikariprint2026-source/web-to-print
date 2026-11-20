@@ -130,7 +130,17 @@ Rohan,103</textarea>
 <div class="bg-[#F7F5F0] p-3 rounded-xl"><b>🔁 Reorder</b><br><button class="text-[#FF5A1F] font-bold" onclick="reorder()">1-Click Reorder →</button></div>
 <div class="bg-[#F7F5F0] p-3 rounded-xl"><b>🧾 Invoices</b><br><button class="font-bold" onclick="downloadInvoice()">Download Invoice ↓</button></div>
 </div>
-<!-- PAY NOW FIX -->
+<section id="adminDashboard" style="display:none;max-width:768px;margin:16px auto;padding:16px;background:#fff;border-radius:12px;border:1px solid #ddd">
+<h3 style="font-weight:900">ADMIN DASHBOARD</h3>
+<p>Admin • <span id="adminEmail">admin@demo.com</span> • <button onclick="adminLogout()" style="font-weight:700;color:red">Logout</button></p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px">
+<div style="background:#F7F5F0;padding:12px;border-radius:12px"><b>Total Orders</b><br><span id="adminTotalOrders">1</span></div>
+<div style="background:#F7F5F0;padding:12px;border-radius:12px"><b>Total Revenue</b><br>₹<span id="adminRevenue">5,015</span></div>
+<div style="background:#F7F5F0;padding:12px;border-radius:12px"><b>Order DH-1042</b><br>Race Numbers • ₹5,015<br>Status: <b id="adminOrderStatus">Unpaid</b></div>
+<div style="background:#F7F5F0;padding:12px;border-radius:12px"><b>Actions</b><br><button onclick="markPaid()" style="font-weight:700">Mark as Paid</button><br><button onclick="markUnpaid()" style="font-weight:700;margin-top:6px">Mark as Unpaid</button></div>
+</div>
+<p id="adminMsg" style="font-weight:700;color:green;margin-top:12px"></p>
+</section><!-- PAY NOW FIX -->
 <button onclick="openPay()" style="background:#16a34a;color:#fff;padding:12px 18px;border:0;border-radius:10px;font-weight:800;cursor:pointer;width:100%;margin-top:10px;">Pay Now • ₹5,015</button>
 <div id="payModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;">
 <div style="background:#fff;max-width:380px;margin:80px auto;padding:20px;border-radius:14px;">
@@ -196,7 +206,10 @@ function reorder(){ selectProduct('Race Numbers',42); document.getElementById('q
 function downloadInvoice(){ alert("Downloading Invoice INV-1042.pdf — ₹5,015 • VAT Invoice • Xero-Ready"); }
 function exportXero(){ alert("Exported Xero CSV: OrderID, Customer, Product, Total, VAT — Ready for Accounting"); }
 function filterAdmin(v){ /* demo filter */ }
-function show(which){ if(which=="customer"){ let e=prompt("Customer Login - Email:","customer@demo.com"); if(!e) return; let p=prompt("Password:","123456"); if(e=="customer@demo.com" && p=="123456"){ alert("Welcome Customer!"); } else { alert("Wrong Email or Password."); } } else { let e=prompt("Admin Login - Email:","admin@demo.com"); if(!e) return; let p=prompt("Password:","admin123"); if(e=="admin@demo.com" && p=="admin123"){ alert("Welcome Admin!"); } else { alert("Wrong Admin Email or Password."); } } }
+function show(which){ if(which=="customer"){ let e=prompt("Customer Login - Email:","customer@demo.com"); if(!e) return; let p=prompt("Password:","123456"); if(e=="customer@demo.com" && p=="123456"){ document.getElementById("dashboard").style.display="grid"; document.getElementById("adminDashboard").style.display="none"; alert("Welcome Customer!"); } else { alert("Wrong Email or Password."); } } else { let e=prompt("Admin Login - Email:","admin@demo.com"); if(!e) return; let p=prompt("Password:","admin123"); if(e=="admin@demo.com" && p=="admin123"){ document.getElementById("dashboard").style.display="none"; document.getElementById("adminDashboard").style.display="block"; document.getElementById("adminEmail").innerText=e; alert("Welcome Admin!"); } else { alert("Wrong Admin Email or Password."); } } }
+function adminLogout(){ document.getElementById("adminDashboard").style.display="none"; document.getElementById("dashboard").style.display="grid"; alert("Admin Logged Out"); }
+function markPaid(){ document.getElementById("adminOrderStatus").innerText="Paid"; document.getElementById("adminMsg").innerText="Order DH-1042 updated to Paid"; }
+function markUnpaid(){ document.getElementById("adminOrderStatus").innerText="Unpaid"; document.getElementById("adminMsg").innerText="Order DH-1042 updated to Unpaid"; }
 calc(); draw();
 </script>
 </body>
