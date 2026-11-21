@@ -137,17 +137,7 @@ Rohan,103</textarea>
 </div>
 </section>
 
-<!-- PIPELINE -->
-<section class="max-w-7xl mx-auto px-4 mt-4"><div class="card">
-<h3 class="geo text-xl font-black">05 • PRODUCTION PIPELINE — EXACT 6 STAGES (PRD §11)</h3>
-<div class="flex flex-wrap gap-2 mt-3" id="pipeline">
-<span class="stage on">1 QUOTE</span><span>→</span><span class="stage on">2 ORDER</span><span>→</span><span class="stage on">3 ARTWORK</span><span>→</span><span class="stage">4 PROOF</span><span>→</span><span class="stage">5 PRODUCTION</span><span>→</span><span class="stage">6 COMPLETED</span>
-</div>
-<p class="text-sm mt-3">Current Stage: <b id="curStage">ARTWORK</b> • Ready for Production: <b id="readyInd" class="text-red-600">🔴 NOT READY — Proof not approved</b></p>
-<button class="btn-o mt-2" onclick="advance()">Advance Pipeline → Next Stage</button>
-<button class="btn mt-2" onclick="checkout()">💳 Checkout & Pay (Demo) → Generate Invoice</button>
-<p id="invoiceMsg" class="text-sm font-bold text-green-600 mt-2"></p>
-</div></section>
+
 
 <!-- DASHBOARDS -->
 <section id="dashboard" class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-4 mt-4">
@@ -171,6 +161,19 @@ Rohan,103</textarea>
 <div style="background:#F7F5F0;padding:12px;border-radius:12px"><b>Actions</b><br><button onclick="markPaid()" style="font-weight:700">Mark as Paid</button><br><button onclick="markUnpaid()" style="font-weight:700;margin-top:6px">Mark as Unpaid</button></div>
 </div>
 <p id="adminMsg" style="font-weight:700;color:green;margin-top:12px"></p>
+<div style="border:2px solid #e74c3c;padding:12px;border-radius:10px;margin-top:10px;background:#fff8f8"><b>⚙️ ADMIN ACTIONS — DH-1042 (Aarav • Race Numbers)</b><br><br><button onclick="alert('Proof Approved for DH-1042')" style="background:#27ae60;color:white;padding:8px 14px;border:none;border-radius:6px;cursor:pointer">✅ Approve Proof</button> <button onclick="localStorage.setItem('dh1042','PRODUCTION');document.body.innerHTML=document.body.innerHTML.replace('PROOF • 🔴 Not Ready','PRODUCTION • 🟢 Ready').replace('PROOF • 🔴','PRODUCTION • 🟢');alert(' DH-1042 moved to PRODUCTION! Saved permanently')" style="background:#2980b9;color:white;padding:8px 14px;border:none;border-radius:6px;cursor:pointer">➡️ Move to Production</button> <button onclick="alert('DH-1042 Marked Completed')" style="background:#2c3e50;color:white;padding:8px 14px;border:none;border-radius:6px;cursor:pointer">🏁 Mark Completed</button></div>
+  
+<!-- PIPELINE -->
+<section class="max-w-7xl mx-auto px-4 mt-4"><div class="card">
+<h3 class="geo text-xl font-black">05 • PRODUCTION PIPELINE — EXACT 6 STAGES (PRD §11)</h3>
+<div class="flex flex-wrap gap-2 mt-3" id="pipeline">
+<span class="stage on">1 QUOTE</span><span>→</span><span class="stage on">2 ORDER</span><span>→</span><span class="stage on">3 ARTWORK</span><span>→</span><span class="stage">4 PROOF</span><span>→</span><span class="stage">5 PRODUCTION</span><span>→</span><span class="stage">6 COMPLETED</span>
+</div>
+<p class="text-sm mt-3">Current Stage: <b id="curStage">ARTWORK</b> • Ready for Production: <b id="readyInd" class="text-red-600">🔴 NOT READY — Proof not approved</b></p>
+<button class="btn-o mt-2" onclick="advance()">Advance Pipeline → Next Stage</button>
+<button class="btn mt-2" onclick="checkout()">💳 Checkout & Pay (Demo) → Generate Invoice</button>
+<p id="invoiceMsg" class="text-sm font-bold text-green-600 mt-2"></p>
+</div></section>  
 </section><!-- PAY NOW FIX -->
 <button onclick="openPay()" style="background:#16a34a;color:#fff;padding:12px 18px;border:0;border-radius:10px;font-weight:800;cursor:pointer;width:100%;margin-top:10px;">Pay Now • ₹5,015</button>
 <div id="payModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;">
@@ -202,7 +205,6 @@ function payCard(){document.getElementById('payStatus').innerText='Payment Succe
 <div class="bg-[#F7F5F0] p-3 rounded-xl mt-3 text-sm flex justify-between"><span>Total Orders: <b>3</b></span><span>Revenue: <b>₹16,215</b></span><span>Archived: <b>12</b></span></div>
 </div>
 </section>
-<div style="border:2px solid #e74c3c;padding:12px;border-radius:10px;margin-top:10px;background:#fff8f8"><b>⚙️ ADMIN ACTIONS — DH-1042 (Aarav • Race Numbers)</b><br><br><button onclick="alert('Proof Approved for DH-1042')" style="background:#27ae60;color:white;padding:8px 14px;border:none;border-radius:6px;cursor:pointer">✅ Approve Proof</button> <button onclick="localStorage.setItem('dh1042','PRODUCTION');document.body.innerHTML=document.body.innerHTML.replace('PROOF • 🔴 Not Ready','PRODUCTION • 🟢 Ready').replace('PROOF • 🔴','PRODUCTION • 🟢');alert(' DH-1042 moved to PRODUCTION! Saved permanently')" style="background:#2980b9;color:white;padding:8px 14px;border:none;border-radius:6px;cursor:pointer">➡️ Move to Production</button> <button onclick="alert('DH-1042 Marked Completed')" style="background:#2c3e50;color:white;padding:8px 14px;border:none;border-radius:6px;cursor:pointer">🏁 Mark Completed</button></div>
 <script>window.addEventListener('load',function(){if(localStorage.getItem('dh1042')=='PRODUCTION'){document.body.innerHTML=document.body.innerHTML.replace('PROOF • 🔴 Not Ready','PRODUCTION • 🟢 Ready').replace('PROOF • 🔴','PRODUCTION • 🟢');}});</script>
 <div class="bg-black text-white rounded-2xl p-5 mt-6 text-center"><h3 class="geo text-xl font-black">READY TO PRINT? GET YOUR QUOTE IN 5 MINUTES</h3><p class="text-white/70 text-sm">Upload Design → Approve Proof → We Print & Deliver in Bengaluru</p><div class="flex flex-wrap justify-center gap-3 mt-4"><a href="tel:+919876543210" class="bg-yellow-400 text-black font-bold px-5 py-2 rounded-full">📞 Call: +91 98765 43210</a><a href="https://wa.me/919876543210" class="bg-green-500 text-white font-bold px-5 py-2 rounded-full">💬 WhatsApp Us</a></div></div>
 <footer class="text-center text-xs text-gray-500 py-6">Digital Heroes • Bengaluru • digitalheroes.co.in • © 2026 All Rights Reserved</footer>
